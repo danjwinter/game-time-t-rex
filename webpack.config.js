@@ -3,8 +3,8 @@ const path = require('path');
 module.exports = {
   devtool: 'eval',
   entry: {
-    main: "./lib/index.js",
-    test: "mocha!./test/index.js"
+    main: ["babel/polyfill", "./lib/index.js"],
+    test: ["babel/polyfill", "mocha!./test/index.js"]
   },
   output: {
     path: __dirname,
