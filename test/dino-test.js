@@ -103,4 +103,54 @@ describe("Dino", function(){
     assert.isFalse(dino.isAtCrestOfJump);
   });
 
+  it("can jump when on ground and not jumping or falling", function(){
+    let dino = new Dino(options);
+
+    assert.isTrue(dino.jumpAvailable);
+  });
+
+  it("can not jump when above ground", function(){
+    let dino = new Dino(options);
+    dino.y = 250;
+
+    assert.isFalse(dino.jumpAvailable);
+  });
+
+  it("can jump", function(){
+    let dino = new Dino(options);
+    dino.jump();
+
+    assert.equal(dino.velocity, -15);
+    assert.isTrue(dino.isJumping);
+  });
+
+  it("moves up when jump is executed", function(){
+    let dino = new Dino(options);
+    dino.velocity = -1
+    dino.executeJump();
+
+    assert.equal(dino.velocity, 0);
+    assert.equal(dino.y, 299);
+  });
+
+  it("moves down when gravity is acvtiated", function(){
+    let dino = new Dino(options);
+    dino.y = 298
+    dino.velocity = 1
+    dino.activateGravity();
+
+    assert.equal(dino.velocity, 1.8);
+    assert.equal(dino.y, 299);
+  });
+
+  it("doesn't fall past ground (300px) when gravity is activated", function(){
+    let dino = new Dino(options);
+    dino.y = 298;
+    dino.velocity = 10;
+    dino.activateGravity();
+
+    assert.equal(dino.y, 300);
+  });
+
+
 });
