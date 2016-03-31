@@ -1,91 +1,156 @@
-var chai = require('chai');
-var assert = chai.assert;
+const chai = require('chai');
+const assert = chai.assert;
 
-var Dino = require('../lib/dino');
+const Dino = require('../lib/dino');
+
+const options = {x: 50, y: 300, width: 10, height: 15}
 
 describe("Dino", function(){
-  it("starts with a default position", function(){
-    var dino = new Dino();
-    var defaultX = 50;
-    var defaultY = 300;
-    var defaultWidth = 10;
-    var defaultHeight = 10;
-    assert.equal(dino.x, defaultX);
-    assert.equal(dino.y, defaultY);
-    assert.equal(dino.width, defaultWidth);
-    assert.equal(dino.height, defaultHeight);
-    assert.equal(dino.jumpAvailable, true);
-    assert.equal(dino.isJumping, false);
-    assert.equal(dino.isFalling, false);
+  it("instantiates with an x", function(){
+    let dino = new Dino(options);
+
+    assert.equal(dino.x, 50);
   });
 
-
-  it("can jump", function(){
-    var dino = new Dino();
-    dino.jump();
-    assert.equal(dino.isJumping, true);
-    assert.equal(dino.jumpSpeed, 15);
-    assert.equal(dino.jumpAvailable, false);
-  });
-
-  it("continues to ascend from jump until speed its 0", function(){
-    var dino = new Dino;
-    var originalY = dino.y;
-    dino.jump();
-    var originalJumpSpeed = dino.jumpSpeed;
-    dino.checkJump();
-    assert.notEqual(dino.y, originalY);
-    assert.equal(dino.y, originalY - dino.jumpSpeed - 1);
-    assert.equal(dino.jumpSpeed, originalJumpSpeed - 1);
-    do {
-      dino.checkJump();
-    } while (dino.jumpSpeed !== 0);
-    assert.equal(dino.isJumping, false);
-    assert.equal(dino.isFalling, true);
-    assert.equal(dino.fallSpeed, 1);
-  })
-
-  it("falls back to original position after jumping", function(){
-    var dino = new Dino();
-    dino.jump();
-    do {
-      dino.checkJump();
-    } while (dino.jumpSpeed !== 0);
-    var crestY = dino.y;
-    dino.checkFall();
-
-    assert.equal(dino.y, crestY + dino.fallSpeed - .8);
-    assert.equal(dino.fallSpeed, 1.8);
-
-    do {
-      dino.checkFall();
-    } while (dino.fallSpeed > 0);
+  it("instantiates with an y", function(){
+    let dino = new Dino(options);
 
     assert.equal(dino.y, 300);
-    assert.equal(dino.isFalling, false);
-    assert.equal(dino.fallSpeed, 0);
-    assert.equal(dino.jumpAvailable, true)
-  })
-
-  it("stops falling at original y coordinates", function(){
-    var dino = new Dino();
-    dino.jump();
-    dino.stopFall();
-
-    assert.equal(dino.isFalling, false);
-    assert.equal(dino.fallSpeed, 0);
-    assert.equal(dino.jumpAvailable, true);
   });
 
-  it("can't jump when already jumping", function(){
-    var dino = new Dino();
+  it("instantiates with an height", function(){
+    let dino = new Dino(options);
+
+    assert.equal(dino.height, 15);
+  });
+
+  it("instantiates with an width", function(){
+    let dino = new Dino(options);
+
+    assert.equal(dino.width, 10);
+  });
+
+  it("instantiates with a velocity of 0", function(){
+    let dino = new Dino(options);
+
+    assert.equal(dino.velocity, 0);
+  });
+
+  it("instantiates on the ground", function(){
+    let dino = new Dino(options);
+
+    assert.isTrue(dino.isOnGround);
+  });
+
+  it("isOnGround return false when y position is not 300", function(){
+    let dino = new Dino(options);
+    dino.y = 250;
+
+    assert.isFalse(dino.isOnGround);
+  });
+
+  it("isJumping returns true when velocity is less than 0", function(){
+    let dino = new Dino(options);
+    dino.velocity = -1;
+
+    assert.isTrue(dino.isJumping);
+  });
+
+  it("isJumping returns false when velocity is greater than 0", function(){
+    let dino = new Dino(options);
+    dino.velocity = 1;
+
+    assert.isFalse(dino.isJumping);
+  });
+
+  it("isFalling returns true when velocity is greater than 0 and y position is less than 300", function(){
+    let dino = new Dino(options);
+    dino.velocity = 1;
+    dino.y = 250;
+
+    assert.isTrue(dino.isFalling);
+  });
+
+  it("isFalling returns false when velocity is less than 0 and y position is less than 300", function(){
+    let dino = new Dino(options);
+    dino.velocity = -1;
+    dino.y = 250;
+
+    assert.isFalse(dino.isFalling);
+  });
+
+  it("isAtCrestOfJump returns true when velocity is 0 and y position is less than 300", function(){
+    let dino = new Dino(options);
+    dino.velocity = 0;
+    dino.y = 250;
+
+    assert.isTrue(dino.isAtCrestOfJump);
+  });
+
+  it("isAtCrestOfJump returns false ascending", function(){
+    let dino = new Dino(options);
+    dino.velocity = -1;
+    dino.y = 250;
+
+    assert.isFalse(dino.isAtCrestOfJump);
+  });
+
+  it("isAtCrestOfJump returns false falling", function(){
+    let dino = new Dino(options);
+    dino.velocity = 1;
+    dino.y = 250;
+
+    assert.isFalse(dino.isAtCrestOfJump);
+  });
+
+  it("can jump when on ground and not jumping or falling", function(){
+    let dino = new Dino(options);
+
+    assert.isTrue(dino.jumpAvailable);
+  });
+
+  it("can not jump when above ground", function(){
+    let dino = new Dino(options);
+    dino.y = 250;
+
+    assert.isFalse(dino.jumpAvailable);
+  });
+
+  it("can jump", function(){
+    let dino = new Dino(options);
     dino.jump();
-    var originalJumpSpeed = dino.jumpSpeed;
-    assert.equal(dino.jumpAvailable, false);
-    assert.equal(originalJumpSpeed, 15);
-    dino.checkJump();
-    assert.equal(dino.jumpSpeed, 14);
-    dino.jump();
-    assert.notEqual(dino.jumpSpeed, 15)
-  })
+
+    assert.equal(dino.velocity, -15);
+    assert.isTrue(dino.isJumping);
+  });
+
+  it("moves up when jump is executed", function(){
+    let dino = new Dino(options);
+    dino.velocity = -1
+    dino.executeJump();
+
+    assert.equal(dino.velocity, 0);
+    assert.equal(dino.y, 299);
+  });
+
+  it("moves down when gravity is acvtiated", function(){
+    let dino = new Dino(options);
+    dino.y = 298
+    dino.velocity = 1
+    dino.activateGravity();
+
+    assert.equal(dino.velocity, 1.8);
+    assert.equal(dino.y, 299);
+  });
+
+  it("doesn't fall past ground (300px) when gravity is activated", function(){
+    let dino = new Dino(options);
+    dino.y = 298;
+    dino.velocity = 10;
+    dino.activateGravity();
+
+    assert.equal(dino.y, 300);
+  });
+
+
 });
