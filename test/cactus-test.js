@@ -36,4 +36,12 @@ describe("Cactus", function(){
     assert.equal(cactus.velocity, 2);
   });
 
+  it("can resurrect itself off to the right of the canvas width", function() {
+    let cactus = new Cactus(options);
+
+    cactus.resurrect(950);
+
+    assert.equal(cactus.x, 950)
+  });
+
 });
