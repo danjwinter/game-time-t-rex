@@ -36,4 +36,39 @@ describe("Cactus", function(){
     assert.equal(cactus.velocity, 2);
   });
 
+  it("can resurrect itself off to the right of the canvas width", function() {
+    let cactus = new Cactus(options);
+
+    cactus.resurrect(950);
+
+    assert.equal(cactus.x, 950)
+  });
+
+  it("resurrects itself when it is off the canvas to the left", function() {
+    let cactus = new Cactus(options);
+    cactus.x = 0 - cactus.width - 1
+
+    cactus.resurrectWhenOffScreenTo(950);
+
+    assert.equal(cactus.x, 950)
+  });
+
+  it("does not resurrect itself when it is on screen", function() {
+    let cactus = new Cactus(options);
+    cactus.x = 50
+
+    cactus.resurrectWhenOffScreenTo(950);
+
+    assert.equal(cactus.x, 50)
+  });
+
+  it("does not resurrect itself when it is off screen to the right", function() {
+    let cactus = new Cactus(options);
+    cactus.x = 950
+
+    cactus.resurrectWhenOffScreenTo(2050);
+
+    assert.equal(cactus.x, 950)
+  });
+
 });
