@@ -3,7 +3,7 @@ const assert = chai.assert;
 
 const Dino = require('../lib/dino');
 
-const options = {x: 50, y: 300, width: 10, height: 15}
+const options = {x: 50, y: 225, width: 10, height: 15}
 
 describe("Dino", function(){
   it("instantiates with an x", function(){
@@ -15,7 +15,7 @@ describe("Dino", function(){
   it("instantiates with an y", function(){
     let dino = new Dino(options);
 
-    assert.equal(dino.y, 300);
+    assert.equal(dino.y, 225);
   });
 
   it("instantiates with an height", function(){
@@ -126,30 +126,32 @@ describe("Dino", function(){
 
   it("moves up when jump is executed", function(){
     let dino = new Dino(options);
-    dino.velocity = -1
+    dino.velocity = -1;
+    let nextJumpX = dino.y + dino.velocity
     dino.executeJump();
 
     assert.equal(dino.velocity, 0);
-    assert.equal(dino.y, 299);
+    assert.equal(dino.y, nextJumpX);
   });
 
   it("moves down when gravity is acvtiated", function(){
     let dino = new Dino(options);
-    dino.y = 298
-    dino.velocity = 1
+    dino.y = 220;
+    dino.velocity = 1;
+    let dinoNextGravityY = dino.y + dino.velocity;
     dino.activateGravity();
 
     assert.equal(dino.velocity, 1.8);
-    assert.equal(dino.y, 299);
+    assert.equal(dino.y, dinoNextGravityY);
   });
 
   it("doesn't fall past ground (300px) when gravity is activated", function(){
     let dino = new Dino(options);
-    dino.y = 298;
+    dino.y = 224;
     dino.velocity = 10;
     dino.activateGravity();
 
-    assert.equal(dino.y, 300);
+    assert.equal(dino.y, 225);
   });
 
 
