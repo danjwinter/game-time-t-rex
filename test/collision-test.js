@@ -146,7 +146,7 @@ describe("Collision", function(){
     let bullet = new Bullet({x: 51, y: 300, width: 4, height: 4});
     let cactus = new Cactus({x: 54, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
-    session.bullets = [bullet]
+    session.activeBullets = [bullet]
     let collision = new Collision(session);
 
     assert.isTrue(collision.bulletHitCactus());
@@ -157,7 +157,7 @@ describe("Collision", function(){
     let bullet = new Bullet({x: 51, y: 300, width: 4, height: 4});
     let cactus = new Cactus({x: 154, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
-    session.bullets = [bullet]
+    session.activeBullets = [bullet]
     let collision = new Collision(session);
 
     assert.isFalse(collision.bulletHitCactus());
