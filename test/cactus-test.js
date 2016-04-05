@@ -30,10 +30,10 @@ describe("Cactus", function(){
     assert.equal(cactus.width, 10);
   });
 
-  it("instantiates with a velocity of 2", function(){
+  it("instantiates with a velocity of 4", function(){
     let cactus = new Cactus(options);
 
-    assert.equal(cactus.velocity, 2);
+    assert.equal(cactus.velocity, 4);
   });
 
   it("can resurrect itself off to the right of the canvas width", function() {

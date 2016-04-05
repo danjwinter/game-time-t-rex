@@ -120,7 +120,7 @@ describe("Dino", function(){
     let dino = new Dino(options);
     dino.jump();
 
-    assert.equal(dino.velocity, -15);
+    assert.equal(dino.velocity, -20);
     assert.isTrue(dino.isJumping);
   });
 
