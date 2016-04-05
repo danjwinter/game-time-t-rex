@@ -30,10 +30,10 @@ describe("Bullet", function(){
     assert.equal(bullet.width, 1);
   });
 
-  it("instantiates with a velocity of 2", function(){
+  it("instantiates with a velocity of 3", function(){
     let bullet = new Bullet(options);
 
-    assert.equal(bullet.velocity, 2);
+    assert.equal(bullet.velocity, 3);
   });
 
   it("can scroll to the right based on its velocity", function(){
