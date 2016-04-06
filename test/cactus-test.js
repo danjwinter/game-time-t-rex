@@ -3,7 +3,7 @@ const assert = chai.assert;
 
 const Cactus = require('../lib/cactus');
 
-const options = {x: 50, y: 300, width: 10, height: 15, velocity: 4}
+const options = {x: 50, y: 300, width: 10, height: 15, velocity: 4};
 
 describe("Cactus", function(){
   it("instantiates with an x", function(){
