@@ -3,7 +3,7 @@ const assert = chai.assert;
 
 const Dino = require('../lib/dino');
 
-const options = {x: 50, y: 225, width: 10, height: 15}
+const options = {x: 50, y: 225, width: 10, height: 15};
 
 describe("Dino", function(){
   it("instantiates with an x", function(){
@@ -127,7 +127,7 @@ describe("Dino", function(){
   it("moves up when jump is executed", function(){
     let dino = new Dino(options);
     dino.velocity = -1;
-    let nextJumpX = dino.y + dino.velocity
+    let nextJumpX = dino.y + dino.velocity;
     dino.executeJump();
 
     assert.equal(dino.velocity, 0);
