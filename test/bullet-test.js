@@ -18,31 +18,25 @@ describe("Bullet", function(){
     assert.equal(bullet.y, 300);
   });
 
-  it("instantiates with an height", function(){
+  it("instantiates with a height", function(){
     let bullet = new Bullet(options);
 
     assert.equal(bullet.height, 1);
   });
 
-  it("instantiates with an width", function(){
+  it("instantiates with a width", function(){
     let bullet = new Bullet(options);
 
     assert.equal(bullet.width, 1);
   });
 
-  it("instantiates with a velocity of 3", function(){
-    let bullet = new Bullet(options);
-
-    assert.equal(bullet.velocity, 3);
-  });
-
-  it("can scroll to the right based on its velocity", function(){
+  it("can scroll to the right 2 pixels", function(){
     let bullet = new Bullet(options);
     let originalX = bullet.x;
 
     bullet.scroll();
 
-    assert.equal(bullet.x, originalX + 1);
+    assert.equal(bullet.x, originalX + 2);
 
   });
 });
