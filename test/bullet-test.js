@@ -3,7 +3,7 @@ const assert = chai.assert;
 
 const Bullet = require('../lib/bullet');
 
-const options = {x: 50, y: 300, width: 1, height: 1}
+const options = {x: 50, y: 300, width: 1, height: 1};
 
 describe("Bullet", function(){
   it("instantiates with an x", function(){
@@ -42,7 +42,7 @@ describe("Bullet", function(){
 
     bullet.scroll();
 
-    assert.equal(bullet.x, originalX + 1)
+    assert.equal(bullet.x, originalX + 1);
 
-  })
+  });
 });

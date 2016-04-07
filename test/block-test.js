@@ -38,13 +38,13 @@ describe('Block', () => {
     const block2 = new Block({x: 5, y: 5, width: 10, height: 10});
 
     assert.isTrue(block1.overlapsWith(block2));
-  })
+  });
 
   it('can tell if it is not overlapping with another block', () => {
     const block1 = new Block({x: 0, y: 0, width: 10, height: 10});
     const block2 = new Block({x: 50, y: 50, width: 10, height: 10});
 
     assert.isFalse(block1.overlapsWith(block2));
-  })
+  });
 
 });
