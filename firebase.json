@@ -1,0 +1,9 @@
+{
+  "firebase": "dino-chrome",
+  "public": "public",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
