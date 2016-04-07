@@ -1,31 +1,20 @@
-# Game Time Starter Kit
+# Jumper: Revenge of the Rex
 
-To install the dependencies:
+To play you can visit: [Game](danjwinter.github.io/game-time-t-rex/)
 
-```
-npm install
-```
+To install locally:
 
-To fire up a development server:
+1. Clone Repo [](git@github.com:danjwinter/game-time-t-rex.git)
+2. Cd into directory
+3. Run npm install
+4. Fire up development server - npm start
+5. Visit [](http://localhost:8080/webpack-dev-server/)
 
-```
-npm start
-```
+![](http://g.recordit.co/XIrK0crUQI.gif)
 
-Once the server is running, you can visit:
 
-* `http://localhost:8080/webpack-dev-server/` to run your application.
-* `http://localhost:8080/webpack-dev-server/test.html` to run your test suite in the browser.
 
 To build the static files:
-
 ```js
 npm run build
-```
-
-
-To run tests in Node:
-
-```js
-npm test
 ```

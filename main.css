@@ -5,7 +5,11 @@ body {
 
 canvas {
   background: #87CEFA;
-  margin-left: 180px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   margin-top: 5px;
   margin-bottom: 25px;
   border-style: inset;
@@ -20,11 +24,29 @@ canvas {
 }
 
 #scoreboard {
-  display: inline-block;
-  float: right;
   font-family: 'Press Start 2P', cursive;
   font-size: 75%;
+}
+
+tr td {
+  padding-bottom: 5px;
+  padding-right: 10px;
+}
+
+#score-pos {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: 'Press Start 2P', cursive;
+  display: inline-block;
+  float: right;
   margin-right: 175px;
+}
+
+
+
+#score-pos h3 {
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 #instructions {
@@ -33,6 +55,11 @@ canvas {
   margin-top: 0px;
   font-family: 'Press Start 2P', cursive;
   font-size: 75%;
+}
+
+.form {
+  font-family: 'Press Start 2P', cursive;
+  text-align: center ;
 }
 
 #instructions h4 {
