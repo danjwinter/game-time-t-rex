@@ -41,7 +41,7 @@ describe("Cactus", function(){
 
     cactus.resurrect(950);
 
-    assert.equal(cactus.x, 950)
+    assert.equal(cactus.x, 950);
   });
 
   it("resurrects itself when it is off the canvas to the left", function() {
@@ -69,6 +69,43 @@ describe("Cactus", function(){
     cactus.resurrectWhenOffScreenTo(2050);
 
     assert.equal(cactus.x, 950);
+  });
+
+  it("does not resurrect itself when it is not shot", function() {
+    let cactus = new Cactus(options);
+    cactus.x = 20;
+    cactus.shot = false;
+
+    cactus.resurrectWhenShotTo(2050);
+
+    assert.equal(cactus.x, 20);
+  });
+
+  it("can resurrect itself when shot", function() {
+    let cactus = new Cactus(options);
+    cactus.x = 20;
+    cactus.shot = true;
+
+    cactus.resurrectWhenShotTo(2050);
+
+    assert.equal(cactus.x, 2050);
+  });
+
+  it("can change image", function() {
+    let cactus = new Cactus(options);
+    cactus.image = "banana stand";
+
+    cactus.changeImage("money");
+
+    assert.equal(cactus.image, "money");
+  });
+
+  it("can update", function() {
+    let cactus = new Cactus(options);
+    let originalX = cactus.x;
+    cactus.update();
+
+    assert.equal(cactus.x, originalX - cactus.velocity);
   });
 
 });

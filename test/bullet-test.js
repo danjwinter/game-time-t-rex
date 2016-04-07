@@ -37,6 +37,14 @@ describe("Bullet", function(){
     bullet.scroll();
 
     assert.equal(bullet.x, originalX + 2);
+  });
 
+  it("updates by scrolling to the right 2 pixels", function(){
+    let bullet = new Bullet(options);
+    let originalX = bullet.x;
+
+    bullet.update();
+
+    assert.equal(bullet.x, originalX + 2);
   });
 });

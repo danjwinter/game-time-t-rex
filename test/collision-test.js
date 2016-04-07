@@ -163,6 +163,15 @@ describe("Collision", function(){
     assert.isFalse(collision.bulletHitCactus());
   });
 
-  // test detectHit()
+  it("can remove spent bullets", function(){
+    let session = {activeBullets: [1, 2]};
+    let collision = new Collision(session);
+
+    collision.removeBullet();
+
+    assert.equal(session.activeBullets.length, 1);
+  });
+
+
 
 });
