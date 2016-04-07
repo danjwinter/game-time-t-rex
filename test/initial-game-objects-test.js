@@ -12,12 +12,12 @@ const InitialGameObjects = require('../lib/initial-game-objects');
 describe("InitialGameObjects", function(){
   it("instantiates 3 bullets", function(){
     let igo = new InitialGameObjects();
-
-    assert.equal(igo.bullets.length, 3);
+    assert.equal(igo.availableBullets.length, 3);
   });
 
   it("instantiates with bullets", function(){
     let igo = new InitialGameObjects();
+
     let bullets = igo.availableBullets;
 
     for(let i = 0; i < bullets.length; i++) {
