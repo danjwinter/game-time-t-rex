@@ -18,7 +18,7 @@ describe("InitialGameObjects", function(){
 
   it("instantiates with bullets", function(){
     let igo = new InitialGameObjects();
-    let bullets = igo.bullets;
+    let bullets = igo.availableBullets;
 
     for(let i = 0; i < bullets.length; i++) {
       assert.instanceOf(bullets[i], Bullet);
