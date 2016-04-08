@@ -1,6 +1,6 @@
 # Jumper: Revenge of the Rex
 
-To play you can visit: [Game](danjwinter.github.io/game-time-t-rex/)
+To play you can visit: [Game](http://danjwinter.github.io/game-time-t-rex/)
 
 To install locally:
 
