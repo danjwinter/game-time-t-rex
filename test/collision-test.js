@@ -35,32 +35,6 @@ describe("Collision", function(){
     assert.equal(collision.cactus, session.cacti[0]);
   });
 
-  it("can rearrange cacti", function(){
-    let session = {};
-    session.dino = new Dino({x: 50, y: 300, width: 10, height: 15});
-    let cactus1 = new Cactus({x: 0, y: 300, width: 10, height: 15});
-    let cactus2 = new Cactus({x: 750, y: 300, width: 10, height: 15});
-    session.cacti = [cactus1, cactus2];
-    let collision = new Collision(session);
-
-    collision.rearrangeCactiWhenPastDino();
-
-    assert.deepEqual(collision.cacti, [cactus2, cactus1]);
-  });
-
-  it("does not rearrange cacti when the first is not past the dino", function(){
-    let session = {};
-    session.dino = new Dino({x: 50, y: 300, width: 10, height: 15});
-    let cactus1 = new Cactus({x: 50, y: 300, width: 10, height: 15});
-    let cactus2 = new Cactus({x: 750, y: 300, width: 10, height: 15});
-    session.cacti = [cactus1, cactus2];
-    let collision = new Collision(session);
-
-    collision.rearrangeCactiWhenPastDino();
-
-    assert.deepEqual(collision.cacti, [cactus1, cactus2]);
-  });
-
   it("can determine a bottom right dino hit when true", function(){
     let session = {};
     session.dino = new Dino({x: 44, y: 295, width: 10, height: 10});
@@ -171,7 +145,4 @@ describe("Collision", function(){
 
     assert.equal(session.activeBullets.length, 1);
   });
-
-
-
 });
