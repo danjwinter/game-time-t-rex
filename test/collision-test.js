@@ -5,12 +5,14 @@ const Dino = require('../lib/dino');
 const Cactus = require('../lib/cactus');
 const Bullet = require('../lib/bullet');
 const Collision = require('../lib/collision');
+const Images = require('../lib/imageRepo');
+
 
 describe("Collision", function(){
   it("instantiates with a dino", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 300, width: 10, height: 15});
-    session.cacti = [new Cactus({x: 750, y: 300, width: 10, height: 15})];
+    session.cacti = [new Cactus({image: Images.cactus2, x: 750, y: 300, width: 10, height: 15})];
     let collision = new Collision(session);
 
     assert.equal(collision.dino, session.dino);
@@ -20,7 +22,7 @@ describe("Collision", function(){
 
     let session = {};
     session.dino = new Dino({x: 50, y: 300, width: 10, height: 15});
-    session.cacti = [new Cactus({x: 750, y: 300, width: 10, height: 15})];
+    session.cacti = [new Cactus({image: Images.cactus2, x: 750, y: 300, width: 10, height: 15})];
     let collision = new Collision(session);
 
     assert.deepEqual(collision.cacti, session.cacti);
@@ -29,42 +31,16 @@ describe("Collision", function(){
   it("instantiates with a cactus", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 300, width: 10, height: 15});
-    session.cacti = [new Cactus({x: 750, y: 300, width: 10, height: 15})];
+    session.cacti = [new Cactus({image: Images.cactus2, x: 750, y: 300, width: 10, height: 15})];
     let collision = new Collision(session);
 
-    assert.equal(collision.cactus, session.cacti[0]);
-  });
-
-  it("can rearrange cacti", function(){
-    let session = {};
-    session.dino = new Dino({x: 50, y: 300, width: 10, height: 15});
-    let cactus1 = new Cactus({x: 0, y: 300, width: 10, height: 15});
-    let cactus2 = new Cactus({x: 750, y: 300, width: 10, height: 15});
-    session.cacti = [cactus1, cactus2];
-    let collision = new Collision(session);
-
-    collision.rearrangeCactiWhenPastDino();
-
-    assert.deepEqual(collision.cacti, [cactus2, cactus1]);
-  });
-
-  it("does not rearrange cacti when the first is not past the dino", function(){
-    let session = {};
-    session.dino = new Dino({x: 50, y: 300, width: 10, height: 15});
-    let cactus1 = new Cactus({x: 50, y: 300, width: 10, height: 15});
-    let cactus2 = new Cactus({x: 750, y: 300, width: 10, height: 15});
-    session.cacti = [cactus1, cactus2];
-    let collision = new Collision(session);
-
-    collision.rearrangeCactiWhenPastDino();
-
-    assert.deepEqual(collision.cacti, [cactus1, cactus2]);
+    assert.equal(collision.closestCactus, session.cacti[0]);
   });
 
   it("can determine a bottom right dino hit when true", function(){
     let session = {};
     session.dino = new Dino({x: 44, y: 295, width: 10, height: 10});
-    let cactus = new Cactus({x: 50, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 50, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -74,7 +50,7 @@ describe("Collision", function(){
   it("can determine a bottom right dino hit when false", function(){
     let session = {};
     session.dino = new Dino({x: 44, y: 295, width: 10, height: 10});
-    let cactus = new Cactus({x: 150, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 150, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -84,7 +60,7 @@ describe("Collision", function(){
   it("can determine a bottom left dino hit when true", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 295, width: 10, height: 10});
-    let cactus = new Cactus({x: 44, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 44, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -94,7 +70,7 @@ describe("Collision", function(){
   it("can determine a bottom left dino hit when false", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 295, width: 10, height: 10});
-    let cactus = new Cactus({x: 150, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 150, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -104,7 +80,7 @@ describe("Collision", function(){
   it("can determine a bottom middle dino hit when true", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 295, width: 20, height: 10});
-    let cactus = new Cactus({x: 55, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 55, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -114,7 +90,7 @@ describe("Collision", function(){
   it("can determine a bottom middle dino hit when false", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 295, width: 20, height: 10});
-    let cactus = new Cactus({x: 150, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 150, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -124,7 +100,7 @@ describe("Collision", function(){
   it("can determine a dino hit when true", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 295, width: 20, height: 10});
-    let cactus = new Cactus({x: 55, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 55, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -134,7 +110,7 @@ describe("Collision", function(){
   it("can determine a dino hit when false", function(){
     let session = {};
     session.dino = new Dino({x: 50, y: 295, width: 20, height: 10});
-    let cactus = new Cactus({x: 150, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 150, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     let collision = new Collision(session);
 
@@ -143,8 +119,9 @@ describe("Collision", function(){
 
   it("can determine a bullet hit when true", function(){
     let session = {};
+    session.dino = new Dino({x: 50, y: 295, width: 20, height: 10});
     let bullet = new Bullet({x: 51, y: 300, width: 4, height: 4});
-    let cactus = new Cactus({x: 54, y: 300, width: 10, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 54, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     session.activeBullets = [bullet];
     let collision = new Collision(session);
@@ -155,7 +132,8 @@ describe("Collision", function(){
   it("can determine a bullet hit when false", function(){
     let session = {};
     let bullet = new Bullet({x: 51, y: 300, width: 4, height: 4});
-    let cactus = new Cactus({x: 154, y: 300, width: 10, height: 10});
+    session.dino = new Dino({x: 50, y: 295, width: 20, height: 10});
+    let cactus = new Cactus({image: Images.cactus2, x: 154, y: 300, width: 10, height: 10});
     session.cacti = [cactus];
     session.activeBullets = [bullet];
     let collision = new Collision(session);
@@ -171,7 +149,4 @@ describe("Collision", function(){
 
     assert.equal(session.activeBullets.length, 1);
   });
-
-
-
 });
