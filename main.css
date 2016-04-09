@@ -76,3 +76,14 @@ tr td {
   margin-top: 50px;
   margin-bottom: 10px;
 }
+
+#mute-btn {
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 5px;
+}
+
+#unmute-btn {
+    font-family: 'Press Start 2P', cursive;
+    display: none;
+    margin-bottom: 5px;
+}
